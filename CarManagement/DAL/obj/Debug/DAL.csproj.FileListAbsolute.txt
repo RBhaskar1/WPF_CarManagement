@@ -1,0 +1,12 @@
+E:\CarManagement\CarManagement\DAL\bin\Debug\DAL.dll.config
+E:\CarManagement\CarManagement\DAL\bin\Debug\DAL.dll
+E:\CarManagement\CarManagement\DAL\bin\Debug\DAL.pdb
+E:\CarManagement\CarManagement\DAL\bin\Debug\EntityFramework.dll
+E:\CarManagement\CarManagement\DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\CarManagement\CarManagement\DAL\bin\Debug\EntityFramework.xml
+E:\CarManagement\CarManagement\DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\CarManagement\CarManagement\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+E:\CarManagement\CarManagement\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+E:\CarManagement\CarManagement\DAL\obj\Debug\DAL.csproj.CopyComplete
+E:\CarManagement\CarManagement\DAL\obj\Debug\DAL.dll
+E:\CarManagement\CarManagement\DAL\obj\Debug\DAL.pdb

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarManagement", "CarManagement\CarManagement.csproj", "{7554E0EA-8E75-4D71-B68C-D17078CAF0EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A5BF9708-3325-4FE2-97FB-F70F7A8F2846}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7554E0EA-8E75-4D71-B68C-D17078CAF0EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7554E0EA-8E75-4D71-B68C-D17078CAF0EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7554E0EA-8E75-4D71-B68C-D17078CAF0EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7554E0EA-8E75-4D71-B68C-D17078CAF0EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BF9708-3325-4FE2-97FB-F70F7A8F2846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BF9708-3325-4FE2-97FB-F70F7A8F2846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BF9708-3325-4FE2-97FB-F70F7A8F2846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BF9708-3325-4FE2-97FB-F70F7A8F2846}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E607A4DE-1F91-43DE-930F-7331A4032865}
+	EndGlobalSection
+EndGlobal

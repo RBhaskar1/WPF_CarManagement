@@ -1,0 +1,19 @@
+﻿<Window x:Class="CarManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarManagement"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="534.16" Width="877.29">
+    <Grid>
+        <Button Name="addCar" Content="Add Car" FontSize="30" HorizontalAlignment="Left" Margin="168,146,0,0" VerticalAlignment="Top" Width="243" Height="72" Click="addCar_Click" IsEnabled="False"/>
+        <Button Name="addFeature" Content="Add Car Feature" FontSize="30" HorizontalAlignment="Left" Margin="452,146,0,0" VerticalAlignment="Top" Width="279" Height="72" Click="addFeature_Click" IsEnabled="False"/>
+        <Button Name="addModel" Content="Add Car Model" FontSize="30" HorizontalAlignment="Left" Margin="168,244,0,0" VerticalAlignment="Top" Width="243" Height="72" Click="addModel_Click" IsEnabled="False"/>
+        <Button Name="displayCars" Content="Display Car Deatails" FontSize="30" HorizontalAlignment="Left" Margin="452,244,0,0" VerticalAlignment="Top" Width="279" Height="72" Click="displayCars_Click" IsEnabled="False"/>
+        <Button Name="searchUpdate" Content="Search And Update Car" FontSize="30" HorizontalAlignment="Left" Margin="250,340,0,0" VerticalAlignment="Top" Width="401" Height="61" Click="searchUpdate_Click" IsEnabled="False"/>
+        <Label Content="Stock Management" FontSize="60" HorizontalAlignment="Left" Margin="168,15,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="logout" Content="LOG OUT / EXIT" Background="OrangeRed" FontSize="30" HorizontalAlignment="Left" Margin="250,421,0,0" VerticalAlignment="Top" Width="401" Height="60" Click="logout_Click"/>
+
+    </Grid>
+</Window>

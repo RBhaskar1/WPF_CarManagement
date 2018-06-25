@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GSQ2_Rakshit_DADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarFeature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Car_Feature_Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CarModel">
+          <Key>
+            <PropertyRef Name="ModelID" />
+          </Key>
+          <Property Name="ModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOfSeats" Type="int" Nullable="false" />
+          <Property Name="EngineSize" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cars_Sold">
+          <Key>
+            <PropertyRef Name="Car_Sold_ID" />
+          </Key>
+          <Property Name="Car_Sold_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Car_For_Sale_Id" Type="int" Nullable="false" />
+          <Property Name="Customer_Id" Type="int" Nullable="false" />
+          <Property Name="Sale_Price" Type="money" Nullable="false" />
+          <Property Name="Date_Sold" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Licence_Number" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Age" Type="float" Nullable="false" />
+          <Property Name="License_Expiry_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Office_Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Phone_Extension_Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeaturesOnCars">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Car_For_Sale_ID" Type="int" Nullable="false" />
+          <Property Name="Car_Feature_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IndividualCar">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Colour" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Current_Mileage" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_Imported" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Manufacture_Year" Type="int" Nullable="false" />
+          <Property Name="Transmission" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Body_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Cars_Sold_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Cars_Sold" Type="Self.Cars_Sold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Cars_Sold">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Sold_IndividualCar">
+          <End Role="IndividualCar" Type="Self.IndividualCar" Multiplicity="1" />
+          <End Role="Cars_Sold" Type="Self.Cars_Sold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndividualCar">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="Cars_Sold">
+              <PropertyRef Name="Car_For_Sale_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeaturesOnCars_CarFeature">
+          <End Role="CarFeature" Type="Self.CarFeature" Multiplicity="1" />
+          <End Role="FeaturesOnCars" Type="Self.FeaturesOnCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarFeature">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="FeaturesOnCars">
+              <PropertyRef Name="Car_Feature_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeaturesOnCars_IndividualCar">
+          <End Role="IndividualCar" Type="Self.IndividualCar" Multiplicity="1" />
+          <End Role="FeaturesOnCars" Type="Self.FeaturesOnCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndividualCar">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="FeaturesOnCars">
+              <PropertyRef Name="Car_For_Sale_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndividualCar_CarModel">
+          <End Role="CarModel" Type="Self.CarModel" Multiplicity="1" />
+          <End Role="IndividualCar" Type="Self.IndividualCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarModel">
+              <PropertyRef Name="ModelID" />
+            </Principal>
+            <Dependent Role="IndividualCar">
+              <PropertyRef Name="Model_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GSQ2_Rakshit_DADModelStoreContainer">
+          <EntitySet Name="CarFeature" EntityType="Self.CarFeature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarModel" EntityType="Self.CarModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cars_Sold" EntityType="Self.Cars_Sold" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeaturesOnCars" EntityType="Self.FeaturesOnCars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndividualCar" EntityType="Self.IndividualCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cars_Sold_Customer" Association="Self.FK_Cars_Sold_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cars_Sold" EntitySet="Cars_Sold" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Sold_IndividualCar" Association="Self.FK_Cars_Sold_IndividualCar">
+            <End Role="IndividualCar" EntitySet="IndividualCar" />
+            <End Role="Cars_Sold" EntitySet="Cars_Sold" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Person" Association="Self.FK_Customer_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Person" Association="Self.FK_Employee_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeaturesOnCars_CarFeature" Association="Self.FK_FeaturesOnCars_CarFeature">
+            <End Role="CarFeature" EntitySet="CarFeature" />
+            <End Role="FeaturesOnCars" EntitySet="FeaturesOnCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeaturesOnCars_IndividualCar" Association="Self.FK_FeaturesOnCars_IndividualCar">
+            <End Role="IndividualCar" EntitySet="IndividualCar" />
+            <End Role="FeaturesOnCars" EntitySet="FeaturesOnCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndividualCar_CarModel" Association="Self.FK_IndividualCar_CarModel">
+            <End Role="CarModel" EntitySet="CarModel" />
+            <End Role="IndividualCar" EntitySet="IndividualCar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GSQ2_Rakshit_DADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Con" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarFeatures" EntityType="GSQ2_Rakshit_DADModel.CarFeature" />
+          <EntitySet Name="CarModels" EntityType="GSQ2_Rakshit_DADModel.CarModel" />
+          <EntitySet Name="Cars_Sold" EntityType="GSQ2_Rakshit_DADModel.Cars_Sold" />
+          <EntitySet Name="Customers" EntityType="GSQ2_Rakshit_DADModel.Customer" />
+          <EntitySet Name="Employees" EntityType="GSQ2_Rakshit_DADModel.Employee" />
+          <EntitySet Name="FeaturesOnCars" EntityType="GSQ2_Rakshit_DADModel.FeaturesOnCar" />
+          <EntitySet Name="IndividualCars" EntityType="GSQ2_Rakshit_DADModel.IndividualCar" />
+          <EntitySet Name="People" EntityType="GSQ2_Rakshit_DADModel.Person" />
+          <AssociationSet Name="FK_FeaturesOnCars_CarFeature" Association="GSQ2_Rakshit_DADModel.FK_FeaturesOnCars_CarFeature">
+            <End Role="CarFeature" EntitySet="CarFeatures" />
+            <End Role="FeaturesOnCar" EntitySet="FeaturesOnCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndividualCar_CarModel" Association="GSQ2_Rakshit_DADModel.FK_IndividualCar_CarModel">
+            <End Role="CarModel" EntitySet="CarModels" />
+            <End Role="IndividualCar" EntitySet="IndividualCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Sold_Customer" Association="GSQ2_Rakshit_DADModel.FK_Cars_Sold_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Cars_Sold" EntitySet="Cars_Sold" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Sold_IndividualCar" Association="GSQ2_Rakshit_DADModel.FK_Cars_Sold_IndividualCar">
+            <End Role="IndividualCar" EntitySet="IndividualCars" />
+            <End Role="Cars_Sold" EntitySet="Cars_Sold" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Person" Association="GSQ2_Rakshit_DADModel.FK_Customer_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Person" Association="GSQ2_Rakshit_DADModel.FK_Employee_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeaturesOnCars_IndividualCar" Association="GSQ2_Rakshit_DADModel.FK_FeaturesOnCars_IndividualCar">
+            <End Role="IndividualCar" EntitySet="IndividualCars" />
+            <End Role="FeaturesOnCar" EntitySet="FeaturesOnCars" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CarFeature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car_Feature_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FeaturesOnCars" Relationship="GSQ2_Rakshit_DADModel.FK_FeaturesOnCars_CarFeature" FromRole="CarFeature" ToRole="FeaturesOnCar" />
+        </EntityType>
+        <EntityType Name="CarModel">
+          <Key>
+            <PropertyRef Name="ModelID" />
+          </Key>
+          <Property Name="ModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfSeats" Type="Int32" Nullable="false" />
+          <Property Name="EngineSize" Type="Double" Nullable="false" />
+          <NavigationProperty Name="IndividualCars" Relationship="GSQ2_Rakshit_DADModel.FK_IndividualCar_CarModel" FromRole="CarModel" ToRole="IndividualCar" />
+        </EntityType>
+        <EntityType Name="Cars_Sold">
+          <Key>
+            <PropertyRef Name="Car_Sold_ID" />
+          </Key>
+          <Property Name="Car_Sold_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car_For_Sale_Id" Type="Int32" Nullable="false" />
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
+          <Property Name="Sale_Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Date_Sold" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="GSQ2_Rakshit_DADModel.FK_Cars_Sold_Customer" FromRole="Cars_Sold" ToRole="Customer" />
+          <NavigationProperty Name="IndividualCar" Relationship="GSQ2_Rakshit_DADModel.FK_Cars_Sold_IndividualCar" FromRole="Cars_Sold" ToRole="IndividualCar" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Licence_Number" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Double" Nullable="false" />
+          <Property Name="License_Expiry_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cars_Sold" Relationship="GSQ2_Rakshit_DADModel.FK_Cars_Sold_Customer" FromRole="Customer" ToRole="Cars_Sold" />
+          <NavigationProperty Name="Person" Relationship="GSQ2_Rakshit_DADModel.FK_Customer_Person" FromRole="Customer" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Office_Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Extension_Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="GSQ2_Rakshit_DADModel.FK_Employee_Person" FromRole="Employee" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="FeaturesOnCar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Car_For_Sale_ID" Type="Int32" Nullable="false" />
+          <Property Name="Car_Feature_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CarFeature" Relationship="GSQ2_Rakshit_DADModel.FK_FeaturesOnCars_CarFeature" FromRole="FeaturesOnCar" ToRole="CarFeature" />
+          <NavigationProperty Name="IndividualCar" Relationship="GSQ2_Rakshit_DADModel.FK_FeaturesOnCars_IndividualCar" FromRole="FeaturesOnCar" ToRole="IndividualCar" />
+        </EntityType>
+        <EntityType Name="IndividualCar">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Colour" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Current_Mileage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Imported" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Manufacture_Year" Type="Int32" Nullable="false" />
+          <Property Name="Transmission" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Body_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarModel" Relationship="GSQ2_Rakshit_DADModel.FK_IndividualCar_CarModel" FromRole="IndividualCar" ToRole="CarModel" />
+          <NavigationProperty Name="Cars_Sold" Relationship="GSQ2_Rakshit_DADModel.FK_Cars_Sold_IndividualCar" FromRole="IndividualCar" ToRole="Cars_Sold" />
+          <NavigationProperty Name="FeaturesOnCars" Relationship="GSQ2_Rakshit_DADModel.FK_FeaturesOnCars_IndividualCar" FromRole="IndividualCar" ToRole="FeaturesOnCar" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="GSQ2_Rakshit_DADModel.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="GSQ2_Rakshit_DADModel.FK_Employee_Person" FromRole="Person" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_FeaturesOnCars_CarFeature">
+          <End Type="GSQ2_Rakshit_DADModel.CarFeature" Role="CarFeature" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.FeaturesOnCar" Role="FeaturesOnCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarFeature">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="FeaturesOnCar">
+              <PropertyRef Name="Car_Feature_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndividualCar_CarModel">
+          <End Type="GSQ2_Rakshit_DADModel.CarModel" Role="CarModel" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.IndividualCar" Role="IndividualCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarModel">
+              <PropertyRef Name="ModelID" />
+            </Principal>
+            <Dependent Role="IndividualCar">
+              <PropertyRef Name="Model_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Sold_Customer">
+          <End Type="GSQ2_Rakshit_DADModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.Cars_Sold" Role="Cars_Sold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Cars_Sold">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cars_Sold_IndividualCar">
+          <End Type="GSQ2_Rakshit_DADModel.IndividualCar" Role="IndividualCar" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.Cars_Sold" Role="Cars_Sold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndividualCar">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="Cars_Sold">
+              <PropertyRef Name="Car_For_Sale_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Person">
+          <End Type="GSQ2_Rakshit_DADModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Person">
+          <End Type="GSQ2_Rakshit_DADModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeaturesOnCars_IndividualCar">
+          <End Type="GSQ2_Rakshit_DADModel.IndividualCar" Role="IndividualCar" Multiplicity="1" />
+          <End Type="GSQ2_Rakshit_DADModel.FeaturesOnCar" Role="FeaturesOnCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndividualCar">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="FeaturesOnCar">
+              <PropertyRef Name="Car_For_Sale_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GSQ2_Rakshit_DADModelStoreContainer" CdmEntityContainer="Con">
+          <EntitySetMapping Name="CarFeatures">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.CarFeature">
+              <MappingFragment StoreEntitySet="CarFeature">
+                <ScalarProperty Name="Car_Feature_Description" ColumnName="Car_Feature_Description" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarModels">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.CarModel">
+              <MappingFragment StoreEntitySet="CarModel">
+                <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+                <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars_Sold">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Cars_Sold">
+              <MappingFragment StoreEntitySet="Cars_Sold">
+                <ScalarProperty Name="Date_Sold" ColumnName="Date_Sold" />
+                <ScalarProperty Name="Sale_Price" ColumnName="Sale_Price" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Car_For_Sale_Id" ColumnName="Car_For_Sale_Id" />
+                <ScalarProperty Name="Car_Sold_ID" ColumnName="Car_Sold_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="License_Expiry_Date" ColumnName="License_Expiry_Date" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Licence_Number" ColumnName="Licence_Number" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Phone_Extension_Number" ColumnName="Phone_Extension_Number" />
+                <ScalarProperty Name="Office_Address" ColumnName="Office_Address" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeaturesOnCars">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.FeaturesOnCar">
+              <MappingFragment StoreEntitySet="FeaturesOnCars">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Car_Feature_ID" ColumnName="Car_Feature_ID" />
+                <ScalarProperty Name="Car_For_Sale_ID" ColumnName="Car_For_Sale_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndividualCars">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.IndividualCar">
+              <MappingFragment StoreEntitySet="IndividualCar">
+                <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+                <ScalarProperty Name="Body_Type" ColumnName="Body_Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="Manufacture_Year" ColumnName="Manufacture_Year" />
+                <ScalarProperty Name="Date_Imported" ColumnName="Date_Imported" />
+                <ScalarProperty Name="Current_Mileage" ColumnName="Current_Mileage" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

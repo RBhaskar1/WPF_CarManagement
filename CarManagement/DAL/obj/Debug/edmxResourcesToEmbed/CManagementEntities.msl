@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GSQ2_Rakshit_DADModelStoreContainer" CdmEntityContainer="Con">
+    <EntitySetMapping Name="CarFeatures">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.CarFeature">
+        <MappingFragment StoreEntitySet="CarFeature">
+          <ScalarProperty Name="Car_Feature_Description" ColumnName="Car_Feature_Description" />
+          <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarModels">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.CarModel">
+        <MappingFragment StoreEntitySet="CarModel">
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars_Sold">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Cars_Sold">
+        <MappingFragment StoreEntitySet="Cars_Sold">
+          <ScalarProperty Name="Date_Sold" ColumnName="Date_Sold" />
+          <ScalarProperty Name="Sale_Price" ColumnName="Sale_Price" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Car_For_Sale_Id" ColumnName="Car_For_Sale_Id" />
+          <ScalarProperty Name="Car_Sold_ID" ColumnName="Car_Sold_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="License_Expiry_Date" ColumnName="License_Expiry_Date" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Licence_Number" ColumnName="Licence_Number" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Phone_Extension_Number" ColumnName="Phone_Extension_Number" />
+          <ScalarProperty Name="Office_Address" ColumnName="Office_Address" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeaturesOnCars">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.FeaturesOnCar">
+        <MappingFragment StoreEntitySet="FeaturesOnCars">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Car_Feature_ID" ColumnName="Car_Feature_ID" />
+          <ScalarProperty Name="Car_For_Sale_ID" ColumnName="Car_For_Sale_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IndividualCars">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.IndividualCar">
+        <MappingFragment StoreEntitySet="IndividualCar">
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Body_Type" ColumnName="Body_Type" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+          <ScalarProperty Name="Manufacture_Year" ColumnName="Manufacture_Year" />
+          <ScalarProperty Name="Date_Imported" ColumnName="Date_Imported" />
+          <ScalarProperty Name="Current_Mileage" ColumnName="Current_Mileage" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="GSQ2_Rakshit_DADModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

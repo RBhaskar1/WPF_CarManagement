@@ -1,0 +1,45 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarManagement"
+        xmlns:DAL="clr-namespace:DAL;assembly=DAL" x:Class="CarManagement.AddFeature"
+        mc:Ignorable="d"
+        Title="AddFeature" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="carFeatureViewSource" d:DesignSource="{d:DesignInstance {x:Type DAL:CarFeature}, CreateList=True}"/>
+        <CollectionViewSource x:Key="individualCarViewSource" d:DesignSource="{d:DesignInstance {x:Type DAL:IndividualCar}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid>
+
+        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="252,110,0,0" HorizontalAlignment="Left" DataContext="{StaticResource carFeatureViewSource}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Car Feature Description:"/>
+            <TextBox x:Uid="Feature Description" x:Name="car_Feature_DescriptionTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Car_Feature_Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <!--<Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Feature ID:"/>
+            <TextBox x:Name="featureIDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding FeatureID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>-->
+        </Grid>
+        <Button x:Name="CarFeature" Content="Add Car Feature" HorizontalAlignment="Left" Margin="272,194,0,0" VerticalAlignment="Top" Width="214" Height="39" Click="CarFeature_Click"/>
+        <Button x:Name="back" Content="GO BACK" Background="OrangeRed" HorizontalAlignment="Left" Margin="314,256,0,0" VerticalAlignment="Top" Width="140" Height="42" Click="back_Click"/>
+        <Grid x:Name="grid2" DataContext="{StaticResource individualCarViewSource}" HorizontalAlignment="Left" Margin="252,148,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="144"/>
+                <ColumnDefinition Width="Auto" MinWidth="134.4"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Car ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,3.8" Grid.Row="0" VerticalAlignment="Center" Height="25" Width="45"/>
+            <TextBox x:Uid="Car ID" x:Name="carIDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="2,5,0,4.8" Grid.Row="0" Text="{Binding CarID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+
+    </Grid>
+</Window>
